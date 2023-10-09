@@ -20,12 +20,19 @@ This seciont covers the installation steps.
 
 **Note**: It's presumed that the `amix/vimrc` configuration is **already installed and working** without issues. If that's not the case, please follow the `amix/vimrc`'s [installation guide](https://github.com/amix/vimrc#how-to-install-the-awesome-version).
 
-1. Copy the contents of `my_configs.vim` into your. `~/.vim_runtime/my_configs.vim` file.
+1. Clone the repository locally.
+2. Pull the `VIM` plugin's submodules with:
+
+    ```sh
+    git submodule update --init --recursive
+    ```
+
+3. Copy the contents of `my_configs.vim` into your. `~/.vim_runtime/my_configs.vim` file.
 
     * If you have a fresh installation of `amix/vimrc`, you will need to first create the  `my_configs.vim` file.
 
-2. Copy the contents of `/my_plugins` into your `~/.vim_runtime/my_plugins` directory.
-3. Run `:so ~/.vimrc` within the editor.
+4. Copy the contents of `/my_plugins` into your `~/.vim_runtime/my_plugins` directory.
+5. Run `:so ~/.vimrc` within the editor.
 
 
 ## Resources
