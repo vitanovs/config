@@ -1,0 +1,102 @@
+" Sets how many lines of history VIM has to remember
+set history=500
+
+" Show line numbers
+set number
+
+" Enable filetype plugins
+filetype plugin on
+filetype indent on
+
+" Enable autoread
+"set autoread
+"set updatetime=500
+
+" Set to auto read when a file is changed from the outside
+set autoread
+au FocusGained,BufEnter * silent! checktime
+
+" Map <leader> to ','
+let mapleader = ","
+
+" Fast saving and quit
+nmap <leader>w :w!<cr>
+nmap <leader>q :q!<cr>
+nmap <leader>Q :qa!<cr>
+
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" ============================
+" = Plugins Configurations   =
+" ============================
+
+call plug#begin()
+
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
+Plug 'altercation/solarized'
+Plug 'itchyny/lightline.vim'
+Plug 'preservim/nerdtree'
+Plug 'jlanzarotta/bufexplorer'
+Plug 'miyakogi/conoline.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+Plug 'vim-scripts/peaksea'
+
+call plug#end()
+
+" Golang configuration
+autocmd FileType go nnoremap <leader>e :GoRename<CR>
+autocmd FileType go nnoremap <leader>r :GoReferrers<CR>
+autocmd FileType go nnoremap <leader>i :GoImplements<CR>
+autocmd FileType go nnoremap <leader>W :GoSameIdsToggle<CR>
+autocmd filetype go inoremap <buffer> . .<C-x><C-o>
+
+setlocal omnifunc=go#complete#Complete
+
+let g:go_highlight_fields = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_extra_types = 1
+let g:go_highlight_operators = 1
+let g:go_fmt_autosave = 1
+let g:go_fmt_command = "goimports"
+let g:go_auto_type_info = 1
+
+" Solarized configoration
+let g:solarized_termcolors=256
+
+" LightLine configuration
+set laststatus=2
+
+let g:lightline = {
+	\ 'colorscheme': 'solarized',
+	\ }
+
+" NERDTree configuration
+nnoremap <leader>n :NERDTree<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+
+" Conoline configuration
+let g:conoline_auto_enable = 1
+let g:conoline_use_colorscheme_default_normal=0
+let g:conoline_use_colorscheme_default_insert=0
+let g:conoline_color_normal_dark = 'ctermbg=239 ctermfg=none cterm=none'
+let g:conoline_color_insert_dark = 'ctermbg=239 ctermfg=none cterm=none'
+let g:conoline_color_normal_light = 'ctermbg=253 ctermfg=232 cterm=none'
+let g:conoline_color_insert_light = 'ctermbg=253 ctermfg=232 cterm=none'
+
+" FuzzyFinder configuration
+nnoremap <leader>s :FZF<CR>
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+
+" Color scheme configuration
+syntax enable
+set background=dark
+colorscheme peaksea
