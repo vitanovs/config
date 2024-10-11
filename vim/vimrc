@@ -57,7 +57,8 @@ call plug#begin()
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'altercation/solarized'
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
+Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
 Plug 'jlanzarotta/bufexplorer'
 Plug 'miyakogi/conoline.vim'
@@ -70,6 +71,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'altercation/vim-colors-solarized'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-fugitive'
+" Plug 'lifepillar/pgsql.vim'
 
 call plug#end()
 
@@ -77,11 +79,12 @@ call plug#end()
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gR <Plug>(coc-rename)
 
 autocmd CursorHold * silent call CocActionAsync('highlight')
 
 " GitGutter Configuration
-let g:gitgutter_enabled=0
+let g:gitgutter_enabled=1
 let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='~'
 let g:gitgutter_sign_removed='-'
