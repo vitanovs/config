@@ -1,6 +1,6 @@
 # Vim
 
-A [Vim](https://www.vim.org) configuration based on [amix/vimrc](https://github.com/amix/vimrc).
+A simple [Vim](https://www.vim.org) configuration
 
 ## Requirements
 
@@ -8,32 +8,14 @@ This section covers the requirements necessary to install and use the `vim` conf
 
 ### Common
 
-* [Vim](https://www.vim.org) - at least `v9.0`
-
-### Specific
-
-* [amix/vimrc](https://github.com/amix/vimrc) - `master` branch
+* [VimPlug](https://github.com/junegunn/vim-plug) - at least `0.14.0`
 
 ## Installation
 
-This seciont covers the installation steps.
-
-**Note**: It's presumed that the `amix/vimrc` configuration is **already installed and working** without issues. If that's not the case, please follow the `amix/vimrc`'s [installation guide](https://github.com/amix/vimrc#how-to-install-the-awesome-version).
-
-1. Clone the repository locally.
-2. Pull the `VIM` plugin's submodules with:
-
-    ```sh
-    git submodule update --init --recursive
-    ```
-
-3. Copy the contents of `my_configs.vim` into your. `~/.vim_runtime/my_configs.vim` file.
-
-    * If you have a fresh installation of `amix/vimrc`, you will need to first create the  `my_configs.vim` file.
-
-4. Copy the contents of `/my_plugins` into your `~/.vim_runtime/my_plugins` directory.
-5. Run `:so ~/.vimrc` within the editor.
-
+1. Open the redactor
+2. Run `:so ~/.vimrc` ( switch the path to match your local env )
+3. Run `:PlugInstall`
+4. Enjoy
 
 ## Resources
 

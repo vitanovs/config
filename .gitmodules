@@ -1,3 +1,0 @@
-[submodule "vim/my_plugins/conoline"]
-	path = vim/my_plugins/conoline
-	url = https://github.com/miyakogi/conoline.vim
