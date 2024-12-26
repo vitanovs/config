@@ -52,13 +52,14 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
+Plug 'vim-scripts/peaksea'
 
 call plug#end()
 
 " Plugin 'junegunn/fzf' configuration
 let g:fzf_layout = { 'down': '30%' }
-
-nnoremap <leader>s :FZF<CR>
+nnoremap <leader>p :FZF --border --preview cat\ {}<CR>
+nnoremap <leader>s :FZF --border<CR>
 
 " Plugin 'preservim/nerdtree' configuration
 let g:NERDTreeWinPos = "left"
