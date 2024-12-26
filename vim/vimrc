@@ -1,22 +1,26 @@
-" Sets how many lines of history VIM has to remember
-set history=500
-
-" Set the tab size the new line shift size
-set tabstop=4
-set shiftwidth=4
-
-" Show line numbers
-set number
-"set nuw=3
+" Map <leader>
+let mapleader=","
 
 " Enable automatic buffer update
 set autoread
 set updatetime=300
 
-" Exclude blank windows when creating new sessions
-set sessionoptions-=blank
+" Navigate b/w windows
+map <C-j> <C-W>j
+map <c-k> <c-w>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
 
-" Enable Highlighted-search for /
+" Fast vertical/horizontal split
+map <leader>v :vsp<cr>
+map <leader>x :sp<cr>
+
+" Fast save/quit
+map <leader>w :w!<cr>
+map <leader>q :q!<cr>
+map <leader>Q :qa!<cr>
+
+" Enable highlighted search
 set hlsearch
 nnoremap <leader>c :noh<cr>
 
@@ -25,65 +29,52 @@ filetype plugin on
 filetype indent on
 syntax on
 
-highlight SignColumn guibg=#000000 ctermbg=250
+" Exclude blank windows when creating new sessions
+set sessionoptions-=blank
 
+" Show line numbers
+set number
+highlight SignColumn guibg=#000000 ctermbg=250
 autocmd ColorScheme * highlight! link SignColumn LineNr
 
-" Set to auto read when a file is changed from the outside
-set autoread
-au FocusGained,BufEnter * silent! checktime
-
-" Map <leader> to ','
-let mapleader = ","
-
-" Fast saving and quit
-nmap <leader>w :w!<cr>
-nmap <leader>q :q!<cr>
-nmap <leader>Q :qa!<cr>
-
-
-" Smart way to move between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
-
-" ============================
-" = Plugins Configurations   =
-" ============================
+" ==========================
+" = Plugins Configurations =
+" ==========================
 
 call plug#begin()
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'altercation/solarized'
-" Plug 'itchyny/lightline.vim'
-Plug 'vim-airline/vim-airline'
 Plug 'preservim/nerdtree'
-Plug 'jlanzarotta/bufexplorer'
-Plug 'miyakogi/conoline.vim'
+Plug 'morhetz/gruvbox'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'vim-scripts/peaksea'
-Plug 'pangloss/vim-javascript'    " JavaScript support
-Plug 'leafgarland/typescript-vim' " TypeScript syntax
-Plug 'maxmellon/vim-jsx-pretty' 
-Plug 'airblade/vim-gitgutter'
-Plug 'altercation/vim-colors-solarized'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'neoclide/coc.nvim', { 'branch': 'release' }
+Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
-" Plug 'lifepillar/pgsql.vim'
+Plug 'airblade/vim-gitgutter'
 
 call plug#end()
 
-" CoC key mappings
+" Plugin 'junegunn/fzf' configuration
+let g:fzf_layout = { 'down': '30%' }
+
+nnoremap <leader>s :FZF<CR>
+
+" Plugin 'preservim/nerdtree' configuration
+let g:NERDTreeWinPos = "left"
+let g:NERDTreeFileLines = 1
+
+nnoremap <leader>n :NERDTree<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+
+" Plugin 'neoclide/coc' configuration
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gD <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
 nmap <silent> gR <Plug>(coc-rename)
 
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" GitGutter Configuration
+" Plugin 'airblade/vim-gitgutter' configuration
 let g:gitgutter_enabled=1
 let g:gitgutter_sign_added='+'
 let g:gitgutter_sign_modified='~'
@@ -91,33 +82,13 @@ let g:gitgutter_sign_removed='-'
 let g:gitgutter_sign_removed_first_line='-1'
 let g:gitgutter_sign_removed_above_and_below='-_'
 let g:gitgutter_sign_modified_removed='~-'
-
 let g:gitgutter_set_sign_background=1
 
 highlight GitGutterAdd guibg=#00CC00 guifg=#000000 ctermbg=10 ctermfg=0
 highlight GitGutterChange guibg=#ffff00 guifg=#000000 ctermbg=11 ctermfg=0
 highlight GitGutterDelete guibg=#FF0000 guifg=#000000 ctermbg=9 ctermfg=0
 
-" Typescript configuration
-let g:syntastic_typescript_tsc_fname = ''
-let g:typescript_indent_disable = 1
-let g:typescript_compiler_binary = 'tsc'
-let g:typescript_compiler_options = ''
-let g:ale_linters = {'typescript': ['eslint', 'tsserver', 'typecheck']}
-
-" NERDTree configuration
-let g:NERDTreeWinPos = "left"
-let g:NERDTreeFileLines = 1
-
-" Golang configuration
-autocmd FileType go nnoremap <leader>e :GoRename<CR>
-autocmd FileType go nnoremap <leader>r :GoReferrers<CR>
-autocmd FileType go nnoremap <leader>i :GoImplements<CR>
-autocmd FileType go nnoremap <leader>W :GoSameIdsToggle<CR>
-autocmd filetype go inoremap <buffer> . .<C-x><C-o>
-
-setlocal omnifunc=go#complete#Complete
-
+" Plugin 'fatih/vim-go' configuration
 let g:go_highlight_fields = 1
 let g:go_highlight_functions = 1
 let g:go_highlight_function_calls = 1
@@ -127,36 +98,15 @@ let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
 
-" Solarized configoration
-let g:solarized_termcolors=256
-
-" LightLine configuration
-set laststatus=2
-
-let g:lightline = {
-	\ 'colorscheme': 'solarized',
-	\ }
-
-" NERDTree configuration
-nnoremap <leader>n :NERDTree<CR>
-nnoremap <leader>t :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-
-" Conoline configuration
-let g:conoline_auto_enable = 1
-let g:conoline_use_colorscheme_default_normal=0
-let g:conoline_use_colorscheme_default_insert=0
-let g:conoline_color_normal_dark = 'ctermbg=239 ctermfg=none cterm=none'
-let g:conoline_color_insert_dark = 'ctermbg=239 ctermfg=none cterm=none'
-let g:conoline_color_normal_light = 'ctermbg=253 ctermfg=232 cterm=none'
-let g:conoline_color_insert_light = 'ctermbg=253 ctermfg=232 cterm=none'
-
-" FuzzyFinder configuration
-nnoremap <leader>s :FZF<CR>
-
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+" Plugin 'morhetz/gruvbox' configuration
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
 
 " Color scheme configuration
 syntax enable
+
 set background=dark
-colorscheme retrobox
+colorscheme gruvbox
+
+set cursorline
+highlight CursorLine term=bold cterm=bold guibg=Grey40
