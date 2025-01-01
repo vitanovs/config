@@ -57,11 +57,10 @@ Plug 'vim-scripts/peaksea'
 call plug#end()
 
 " Plugin 'junegunn/fzf' configuration
-let g:fzf_layout = { 'down': '30%' }
-nnoremap <leader>p :FZF --border --preview cat\ {}<CR>
+let g:fzf_layout = { 'down': '40%' }
 nnoremap <leader>s :FZF --border<CR>
 
-let $FZF_DEFAULT_OPTS="--preview-window 'right:57%' --preview 'bat --style=numbers --line-range :300 {}'
+let $FZF_DEFAULT_OPTS="--preview-window 'right:50%' --preview 'bat --style=numbers --color=always --line-range :300 {}'
 			\ --bind ctrl-y:preview-up,ctrl-e:preview-down,
 			\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
 			\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
