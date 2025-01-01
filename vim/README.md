@@ -7,7 +7,7 @@ A simple [Vim](https://www.vim.org) configuration
 This section covers the requirements necessary to install and use the `vim` configuration.
 
 * [VimPlug](https://github.com/junegunn/vim-plug) - at least `0.14.0`
-* [Bat] (https://github.com/sharkdp/bat) - at least `0.24.0`
+* [Bat](https://github.com/sharkdp/bat) - at least `0.24.0`
 
 ## Installation
 
