@@ -1,9 +1,23 @@
 " Map <leader>
 let mapleader=","
 
+set nocursorcolumn
+syntax sync minlines=256
+syntax on
+set re=1
+
 " Enable automatic buffer update
 set autoread
-set updatetime=300
+set autowrite
+set updatetime=100
+set timeoutlen=1000
+set ttimeoutlen=0
+
+" Display the completion information in a popup menu.
+set completeopt+=popup
+
+" Display the longest common word.
+set completeopt+=longest
 
 " Navigate b/w windows
 map <C-j> <C-W>j
@@ -45,6 +59,7 @@ call plug#begin()
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'junegunn/seoul256.vim'
 Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
 Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
@@ -52,15 +67,15 @@ Plug 'neoclide/coc.nvim', { 'branch': 'release' }
 Plug 'vim-airline/vim-airline'
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
-Plug 'vim-scripts/peaksea'
 
 call plug#end()
 
 " Plugin 'junegunn/fzf' configuration
 let g:fzf_layout = { 'down': '40%' }
 nnoremap <leader>s :FZF --border<CR>
+nnoremap <leader>a :Ag <CR>
 
-let $FZF_DEFAULT_OPTS="--preview-window 'right:50%' --preview 'bat --style=numbers --color=always --line-range :300 {}'
+let $FZF_DEFAULT_OPTS="--preview-window 'right:50%' --preview 'bat --style=numbers --color=always --line-range :500 {}'
 			\ --bind ctrl-y:preview-up,ctrl-e:preview-down,
 			\ctrl-b:preview-page-up,ctrl-f:preview-page-down,
 			\ctrl-u:preview-half-page-up,ctrl-d:preview-half-page-down,
@@ -71,9 +86,9 @@ let $FZF_DEFAULT_OPTS="--preview-window 'right:50%' --preview 'bat --style=numbe
 let g:NERDTreeWinPos = "left"
 let g:NERDTreeFileLines = 1
 
-nnoremap <leader>n :NERDTree<CR>
-nnoremap <leader>t :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>n :NERDTree<CR> <C-W>=
+nnoremap <leader>t :NERDTreeToggle<CR> <C-W>=
+nnoremap <leader>f :NERDTreeFind<CR> <C-W>=
 
 " Plugin 'neoclide/coc' configuration
 nmap <silent> gd <Plug>(coc-definition)
@@ -96,24 +111,68 @@ highlight GitGutterChange guibg=#ffff00 guifg=#000000 ctermbg=11 ctermfg=0
 highlight GitGutterDelete guibg=#FF0000 guifg=#000000 ctermbg=9 ctermfg=0
 
 " Plugin 'fatih/vim-go' configuration
-let g:go_highlight_fields = 1
-let g:go_highlight_functions = 1
-let g:go_highlight_function_calls = 1
-let g:go_highlight_extra_types = 1
-let g:go_highlight_operators = 1
+let g:go_highlight_fields = 0
+let g:go_highlight_functions = 0
+let g:go_highlight_function_parameters = 0
+let g:go_highlight_function_calls = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_operators = 0
 let g:go_fmt_autosave = 1
 let g:go_fmt_command = "goimports"
 let g:go_auto_type_info = 1
+let g:go_def_mode='gopls'
+let g:go_info_mode='gopls'
+let g:go_doc_popup_window = 1
+let g:go_def_mapping_enabled = 0
+
+let g:go_gopls_enabled = 1
+let g:go_gopls_complete_unimported = 0
+let g:go_gopls_deep_completion = 0
+let g:go_gopls_matcher = "fuzzy"
+let g:go_gopls_gofumpt = 1
+let g:go_echo_go_info = 1
+
+let g:go_highlight_variable_declarations = 0
+let g:go_highlight_variable_assignments = 0
+let g:go_highlight_generate_tags = 0
+let g:go_highlight_types = 0
+let g:go_highlight_fields = 0
+
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_diagnostic_warnings = 0
+let g:go_highlight_diagnostic_errors = 0
+
+let g:syntastic_go_checkers = ['govet', 'errcheck', 'go']
+
+let g:go_metalinter_autosave = 0
+let g:go_metalinter_autosave_enabled = ['vet', 'golint']
+let g:go_metalinter_enabled = ['vet', 'golint', 'errcheck']
+
+let g:go_decls_mode="fzf"
+
+autocmd FileType go nnoremap <silent>K :GoDoc<CR>
+autocmd FileType go inoremap <TAB> <C-x><C-o>
+
+autocmd FileType go nnoremap <leader>r :GoReferrers<CR>
+autocmd FileType go nnoremap <leader>d :GoDef<CR>
+autocmd FileType go nnoremap <leader>i :GoImplements<CR>
+autocmd FileType go nnoremap <leader>e :GoDecls<CR>
+
+set completeopt+=popup
 
 " Plugin 'morhetz/gruvbox' configuration
 let g:gruvbox_contrast_dark='hard'
 let g:gruvbox_contrast_light='hard'
+let g:gruvbox_termcolors=256
 
 " Color scheme configuration
 syntax enable
-
 set background=dark
 colorscheme gruvbox
+
+nnoremap <leader>x :set background=dark \| :let g:seoul256_background=234<CR>
+nnoremap <leader>z :set background=light \| :let g:seoul256_background = 252<CR>
 
 set cursorline
 highlight CursorLine term=bold cterm=bold guibg=Grey40
