@@ -13,6 +13,7 @@ This section covers the requirements necessary to install and use the `tmux` con
 ### Specific
 
 * [urlview](https://github.com/sigpipe/urlview) - Required by the `tmux-urlview` plugin
+* [dark-notify](https://github.com/cormacrelf/dark-notify) - Required by the `erikw/tmux-dark-notify` plugin
 
 ## Resources
 
